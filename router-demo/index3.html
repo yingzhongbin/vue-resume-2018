@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由</title>
+
+</head>
+<body>
+    <style>
+        x-tab ol.nav li.active{
+            background-color: red;
+        }
+        x-tab ol.content li.active{
+            background-color: red;
+        }
+    </style>
+    <x-tab>
+        <ol class="nav">
+            <li>tab 1</li>
+            <li>tab 2</li>
+        </ol>
+        <ol class="content">
+            <li>content 1</li>
+            <li>content 2</li>
+        </ol>
+    </x-tab>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        //
+        $("x-tab").on("click",".nav>li",(e)=>{
+            let $li = $(e.currentTarget)
+            $li.addClass("active").siblings(".active").removeClass("active")
+            let index = $li.index()
+            $li.closest("x-tab").find(".content > li").eq(index)
+                .addClass("active").siblings(".active").removeClass("active")
+        })
+    </script>
+</body>
+</html>
