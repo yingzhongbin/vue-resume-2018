@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>v-if</title>
+  <script src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+      <p v-if="seen">ppppppp</p>
+      <button @click="seen =! seen">toggle</button>
+      <div v-if="Math.random() > .5">if</div>
+      <div v-else>else</div>
+    </div>
+  <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                seen: true
+            }
+        })
+  </script>
+</body>
+</html>

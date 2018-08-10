@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>父子通信</title>
+  <script src="./vue.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <button @click="visible=true">打开</button>
+    <child @close="visible=false" :visible="visible"></child>
+  </div>
+  <script>
+        
+        Vue.component("child",{
+            props:["visible"],
+            template:`
+                <div v-show="visible">
+                    我是儿子
+                    <button @click="$emit('close')">关闭</button>
+                </div>
+            `
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '爸爸',
+                visible:false
+            }
+        })
+  </script>
+</body>
+</html>

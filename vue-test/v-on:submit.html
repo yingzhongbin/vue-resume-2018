@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>v-on:submit</title>
+  <script src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <form action="" v-on:submit.prevent="onSubmit">
+          <input type="submit" value="提交">
+        </form>
+    </div>
+  
+  <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+              message: 'Hello Vue!'
+            },
+            methods:{
+              onSubmit(){
+                console.log("submit")
+              }
+            }
+        })
+  </script>
+</body>
+</html>

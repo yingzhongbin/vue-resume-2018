@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>爷孙通信</title>
+  <script src="./vue.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <button @click="visible=true">打开</button>
+    <child :visible="visible" @close="visible=false"></child>
+  </div>
+  <script>
+       // template 里 只能有一个 根元素
+        Vue.component("child",{
+            props:["visible"],
+            template:`
+                <div>
+                    我是父级组件
+                    <grandchild v-show="visible" @close="$emit('close')"></grandchild>
+                </div>
+            `
+        })
+        Vue.component("grandchild",{
+            template:`
+                <div>
+                    我是孙级组件
+                    <button @click="$emit('close')">关闭</button>
+                </div>
+            `
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '爷级组件',
+                visible:false
+            }
+        })
+  </script>
+</body>
+</html>

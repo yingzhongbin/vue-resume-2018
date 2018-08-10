@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>兄弟通信</title>
+  <script src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <brotherelder></brotherelder>
+        <brotheryounger></brotheryounger>
+    </div>
+    <script>
+        var bus = new Vue()
+        Vue.component("brotherelder",{
+            template:`
+                <div>
+                    我是大哥
+                    <button @click="callYoung">通知二弟</button>
+                </div>
+            `,
+            methods:{
+                callYoung(){
+                    alert("通知弟弟");
+                    bus.$emit("callYoung","弟，妈喊你吃饭了");
+                }
+            },
+            mounted(){
+                bus.$on("callElder",()=>{
+                    alert("哥知道了，我去吃饭了")
+                });
+            }
+        })
+        Vue.component("brotheryounger",{
+            template:`
+                <div>
+                    我是二弟
+                    <button @click="callElder">通知哥哥</button>
+                </div>
+            `,
+            methods:{
+                callElder(){
+                    alert("通知哥哥");
+                    bus.$emit("callElder","哥，妈喊你吃饭了");
+                }
+            },
+            mounted(){
+                bus.$on("callYoung",()=>{
+                    alert("知道了，我去吃饭了")
+                });
+
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+            }
+        })
+    </script>
+</body>
+</html>
