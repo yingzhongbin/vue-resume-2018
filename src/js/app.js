@@ -9,14 +9,27 @@ var app = new Vue({
             email: "example@example.com",
             phone: "13811111111",
             jobTitle: "前端工程师"
-        }
+        },
+        loginVisible:false,
+        signUpVisible:false,
     },
     methods: {
         onEdit(key, value) {
             this.resume[key] = value
         },
-        save(){
+        onClickSave(){
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                this.saveResume()
+
+            }
+            else {
+                //currentUser 为空时，可打开用户注册界面…
+                this.loginVisible = true
+            }
             console.log(this.resume);
+        },
+        saveResume(){
         }
     }
 })

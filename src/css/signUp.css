@@ -1,4 +1,4 @@
-.login{
+.signUp{
     position: fixed;
     min-width: 300px;
     min-height: 400px;
@@ -6,8 +6,8 @@
     top:50%;
     left: 50%;
 }
-.login .form{
+.signUp .form{
     min-width: 300px;
     min-height: 400px;
-    background-color: red;
+    background-color: green;
 }
