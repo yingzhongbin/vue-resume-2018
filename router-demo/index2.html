@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>路由</title>
+    <title>hash路由</title>
 
 </head>
 <body>
@@ -28,18 +28,15 @@
     <script>
         var index = location.hash || "#0"
         index = index.substring(1)
-        console.log(index);
         let $li = $(".nav > li")
         $li.eq(index).addClass("active")
             .siblings(".active").removeClass("active")
-
         $li.closest("x-tab").find(".content > li").eq(index)
             .addClass("active").siblings(".active").removeClass("active")
         $("x-tab").on("click",".nav>li",(e)=>{
             let $li = $(e.currentTarget)
             $li.addClass("active").siblings(".active").removeClass("active")
             let index = $li.index()
-            console.log(index);
             location.hash = index;
             console.log(location.hash);
             $li.closest("x-tab").find(".content > li").eq(index)

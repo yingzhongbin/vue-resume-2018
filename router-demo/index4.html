@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>hash路由</title>
+    <title>path路由</title>
 
 </head>
 <body>
@@ -17,12 +17,12 @@
     <x-tab>
         <ol class="nav">
             <li>
-                <a href="#0">
+                <a href="./tab0">
                     tab 1
                 </a>
             </li>
             <li>
-                <a href="#1">
+                <a href="./tab1">
                     tab 2
                 </a>
             </li>
@@ -31,15 +31,25 @@
             <li>content 1</li>
             <li>content 2</li>
         </ol>
+        <a href="#top">回到顶部</a>
     </x-tab>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script>
         clickTab()
-        window.onhashchange = ()=>{
+        $("x-tab").on("click",".nav li a",(e)=>{
+            e.preventDefault()
+            let a = e.currentTarget
+            let path =  a.getAttribute("href").substring(1)
+            console.log(path);
+            history.pushState(null,null,path)  // 改变url
             clickTab()
-        }
+
+        })
+        // window.onhashchange = ()=>{
+        // }
         function  clickTab() {
-            let index = location.hash.substring(1) || 0
+            let index = location.pathname.substring(4,5) || 0
+            console.log(index);
             $("x-tab .nav li").eq(index)
                 .addClass("active").siblings(".active").removeClass("active")
             $("x-tab .content li").eq(index)
